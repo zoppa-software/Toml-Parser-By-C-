@@ -165,15 +165,17 @@ namespace Toml
                     break;
 
                 case TomlInnerBuffer.LineType.TomlKeyValueLine:     // 2
-                    AnalisysKeyAndValue(iter, this.current, false);
+                    if (!this.AnalisysKeyAndValue(iter, this.current, false)) {
+                        throw new TomlAnalisysException("キー／値解析に失敗", iter);
+                    }
                     break;
 
                 case TomlInnerBuffer.LineType.TomlTableLine:        // 3
-                    AnalisysTable(iter, this.root);
+                    this.AnalisysTable(iter, this.root);
                     break;
 
                 case TomlInnerBuffer.LineType.TomlTableArrayLine:   // 4
-                    AnalisysTableArray(iter, this.root);
+                    this.AnalisysTableArray(iter, this.root);
                     break;
             }
 
@@ -186,7 +188,9 @@ namespace Toml
         /// <summary>キーと値のペアを取得する。</summary>
         /// <param name="iter">イテレータ。</param>
         /// <param name="table">対象テーブル。</param>
-        private void AnalisysKeyAndValue(TomlInnerBuffer.TomlIter iter,
+        /// <param name="lastNoCheck">改行確認するならば真。</param>
+        /// <returns>追加できたならば真。</returns>
+        private bool AnalisysKeyAndValue(TomlInnerBuffer.TomlIter iter,
                                          TomlTable table,
                                          bool lastNoCheck)
         {
@@ -208,7 +212,7 @@ namespace Toml
             iter.Skip(1);
             var val = this.AnalisysValue(iter);     // 1
             if (val.ValueType == TomlValueType.TomlNoneValue) {
-                return;                             // 2
+                return false;                       // 2
             }
 
             // 改行まで確認
@@ -247,6 +251,7 @@ namespace Toml
             var laststr = keyPtr[keyPtr.Count - 1];
             if (!curTable.Contains(laststr)) {
                 curTable.AddKeyAndValue(laststr, val);
+                return true;
             }
             else {
                 throw new TomlAnalisysException("キーが再定義された", iter);

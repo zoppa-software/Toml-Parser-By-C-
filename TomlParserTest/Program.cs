@@ -48,14 +48,51 @@ namespace TomlParserTest
             OneTable("tests\\string-with-pound.toml");
             OneTable("tests\\raw-multiline-string.toml");
             OneTable("tests\\multiline-string.toml");
+
+            OneTable("invalid\\array-mixed-types-arrays-and-ints.toml");
+            OneTable("invalid\\array-mixed-types-ints-and-floats.toml");
+            OneTable("invalid\\array-mixed-types-strings-and-ints.toml");
+            OneTable("invalid\\datetime-malformed-no-leads.toml");
+            OneTable("invalid\\datetime-malformed-no-secs.toml");
+            OneTable("invalid\\datetime-malformed-no-t.toml");
+            OneTable("invalid\\datetime-malformed-with-milli.toml");
+            OneTable("invalid\\duplicate-keys.toml");
+            OneTable("invalid\\duplicate-key-table.toml");
+            OneTable("invalid\\duplicate-tables.toml");
+            OneTable("invalid\\empty-implicit-table.toml");
+            OneTable("invalid\\empty-table.toml");
+            OneTable("invalid\\float-no-leading-zero.toml");
+            OneTable("invalid\\float-no-trailing-digits.toml");
+            OneTable("invalid\\key-empty.toml");
+            OneTable("invalid\\key-hash.toml");
+            OneTable("invalid\\key-newline.toml");
+            OneTable("invalid\\key-open-bracket.toml");
+            OneTable("invalid\\key-single-open-bracket.toml");
+            OneTable("invalid\\key-space.toml");
+            OneTable("invalid\\key-start-bracket.toml");
+            OneTable("invalid\\key-two-equals.toml");
+            OneTable("invalid\\multiline-string-err.toml");
+            OneTable("invalid\\number_2_1_err.toml");
+            OneTable("invalid\\number_2_err.toml");
+            OneTable("invalid\\number_8_1_err.toml");
+            OneTable("invalid\\number_8_err.toml");
+            OneTable("invalid\\number_16_1_err.toml");
+            OneTable("invalid\\number_16_err.toml");
+            OneTable("invalid\\string-bad-byte-escape.toml");
+            OneTable("invalid\\string-bad-escape.toml");
         }
 
         private static void OneTable(string path)
         {
-            Console.WriteLine("---------- {0} ----------", path);
-            var toml = new TomlDocument();
-            toml.LoadPath(path);
-            Console.WriteLine(toml);
+            try {
+                Console.WriteLine("---------- {0} ----------", path);
+                var toml = new TomlDocument();
+                toml.LoadPath(path);
+                Console.WriteLine(toml);
+            }
+            catch (TomlAnalisysException e) {
+                Console.WriteLine(e.ToString());
+            }
         }
     }
 }

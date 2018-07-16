@@ -719,8 +719,7 @@ namespace Toml
         /// <param name="iter">イテレータ。</param>
         /// <param name="numberSign">符号。</param>
         /// <returns>取得した値。</returns>
-        internal static ITomlValue GetNumberValue(this TomlInnerBuffer.TomlIter iter, 
-                                                  bool numberSign)
+        internal static ITomlValue GetNumberValue(this TomlInnerBuffer.TomlIter iter, bool numberSign)
         {
             if (!numberSign &&
                 iter.RemnantLength >= 3 &&

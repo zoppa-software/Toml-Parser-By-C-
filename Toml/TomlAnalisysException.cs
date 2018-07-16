@@ -57,7 +57,9 @@ namespace Toml
         public override string ToString()
         {
             return string.Format("{0} 行:{1} 列:{2}",
-                                 this.Message, this.YPosition, this.XPosition);
+                                 this.Message,
+                                 (this.YPosition >= 0 ? this.YPosition : 0),
+                                 (this.XPosition >= 0 ? this.XPosition : 0));
         }
 
         #endregion
