@@ -6,6 +6,50 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="bin\Debug\netcoreapp2.0\tests\array-empty.toml" />
+    <None Include="bin\Debug\netcoreapp2.0\tests\array-nospaces.toml" />
+    <None Include="bin\Debug\netcoreapp2.0\tests\arrays-hetergeneous.toml" />
+    <None Include="bin\Debug\netcoreapp2.0\tests\arrays-nested.toml" />
+    <None Include="bin\Debug\netcoreapp2.0\tests\arrays.toml" />
+    <None Include="bin\Debug\netcoreapp2.0\tests\bool.toml" />
+    <None Include="bin\Debug\netcoreapp2.0\tests\comments-everywhere.toml" />
+    <None Include="bin\Debug\netcoreapp2.0\tests\datetime.toml" />
+    <None Include="bin\Debug\netcoreapp2.0\tests\dottrd-keys.toml" />
+    <None Include="bin\Debug\netcoreapp2.0\tests\empty.toml" />
+    <None Include="bin\Debug\netcoreapp2.0\tests\example.toml" />
+    <None Include="bin\Debug\netcoreapp2.0\tests\float.toml" />
+    <None Include="bin\Debug\netcoreapp2.0\tests\float_no_number.toml" />
+    <None Include="bin\Debug\netcoreapp2.0\tests\implicit-and-explicit-after.toml" />
+    <None Include="bin\Debug\netcoreapp2.0\tests\implicit-and-explicit-before.toml" />
+    <None Include="bin\Debug\netcoreapp2.0\tests\implicit-groups.toml" />
+    <None Include="bin\Debug\netcoreapp2.0\tests\inline.toml" />
+    <None Include="bin\Debug\netcoreapp2.0\tests\integer.toml" />
+    <None Include="bin\Debug\netcoreapp2.0\tests\key-equals-nospace.toml" />
+    <None Include="bin\Debug\netcoreapp2.0\tests\key-space.toml" />
+    <None Include="bin\Debug\netcoreapp2.0\tests\key-special-chars.toml" />
+    <None Include="bin\Debug\netcoreapp2.0\tests\long-float.toml" />
+    <None Include="bin\Debug\netcoreapp2.0\tests\long-integer.toml" />
+    <None Include="bin\Debug\netcoreapp2.0\tests\multiline-string.toml" />
+    <None Include="bin\Debug\netcoreapp2.0\tests\number-formated-decimal.toml" />
+    <None Include="bin\Debug\netcoreapp2.0\tests\raw-multiline-string.toml" />
+    <None Include="bin\Debug\netcoreapp2.0\tests\raw-string.toml" />
+    <None Include="bin\Debug\netcoreapp2.0\tests\string-empty.toml" />
+    <None Include="bin\Debug\netcoreapp2.0\tests\string-escapes.toml" />
+    <None Include="bin\Debug\netcoreapp2.0\tests\string-simple.toml" />
+    <None Include="bin\Debug\netcoreapp2.0\tests\string-with-pound.toml" />
+    <None Include="bin\Debug\netcoreapp2.0\tests\table-array-implicit.toml" />
+    <None Include="bin\Debug\netcoreapp2.0\tests\table-array-many.toml" />
+    <None Include="bin\Debug\netcoreapp2.0\tests\table-array-nest.toml" />
+    <None Include="bin\Debug\netcoreapp2.0\tests\table-array-one.toml" />
+    <None Include="bin\Debug\netcoreapp2.0\tests\table-empty.toml" />
+    <None Include="bin\Debug\netcoreapp2.0\tests\table-sub-empty.toml" />
+    <None Include="bin\Debug\netcoreapp2.0\tests\table-whitespace.toml" />
+    <None Include="bin\Debug\netcoreapp2.0\tests\table-with-pound.toml" />
+    <None Include="bin\Debug\netcoreapp2.0\tests\unicode-escape.toml" />
+    <None Include="bin\Debug\netcoreapp2.0\tests\unicode-literal.toml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Toml\Toml.csproj" />
   </ItemGroup>
 
