@@ -7,6 +7,8 @@ namespace Toml
     /// <summary>解析サポート機能。</summary>
     internal static class TomlHelper
     {
+        #region "methods"
+
         /// <summary>行の開始を判定する。</summary>
         /// <returns>行のデータ種類。</returns>
         internal static TomlInnerBuffer.LineType CheckStartLineToken(this TomlInnerBuffer.TomlIter iter)
@@ -1120,5 +1122,7 @@ namespace Toml
 
             resExpo = exp_v;
         }
+
+        #endregion
     }
 }

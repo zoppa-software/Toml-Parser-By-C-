@@ -80,6 +80,22 @@ namespace TomlParserTest
             OneTable("invalid\\number_16_err.toml");
             OneTable("invalid\\string-bad-byte-escape.toml");
             OneTable("invalid\\string-bad-escape.toml");
+            OneTable("invalid\\string-byte-escapes.toml");
+            OneTable("invalid\\string-no-close.toml");
+            OneTable("invalid\\table-array-implicit.toml");
+            OneTable("invalid\\table-array-malformed-bracket.toml");
+            OneTable("invalid\\table-array-malformed-empty.toml");
+            OneTable("invalid\\table-empty.toml");
+            OneTable("invalid\\table-nested-brackets-close.toml");
+            OneTable("invalid\\table-nested-brackets-open.toml");
+            OneTable("invalid\\table-whitespace.toml");
+            OneTable("invalid\\table-with-pound.toml");
+            OneTable("invalid\\text-after-array-entries.toml");
+            OneTable("invalid\\text-after-integer.toml");
+            OneTable("invalid\\text-after-string.toml");
+            OneTable("invalid\\text-after-table.toml");
+            OneTable("invalid\\text-before-array-separator.toml");
+            OneTable("invalid\\text-in-array.toml");
         }
 
         private static void OneTable(string path)

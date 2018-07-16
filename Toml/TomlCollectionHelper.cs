@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Toml
+﻿namespace Toml
 {
     /// <summary>解析サポート機能（コレクション向け）</summary>
     internal static class TomlCollectionHelper
@@ -140,7 +136,7 @@ namespace Toml
             iter.SkipSpace();
 
             // ]] の判定
-            if (iter.GetChar(0).ch1 != ']' &&
+            if (iter.GetChar(0).ch1 != ']' ||
                 iter.GetChar(1).ch1 != ']') {
                 return false;
             }

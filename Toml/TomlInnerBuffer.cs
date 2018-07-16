@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
 
 namespace Toml
 {
     /// <summary>UTF8文字。</summary>
-    struct UTF8
+    internal struct UTF8
     {
         #region "fields"
 
@@ -129,7 +128,7 @@ namespace Toml
     }
 
     /// <summary>内部バッファクラス。</summary>
-    sealed class TomlInnerBuffer
+    internal sealed class TomlInnerBuffer
     {
         #region "enum"
 
