@@ -7,6 +7,8 @@ namespace TomlParserTest
     {
         static void Main(string[] args)
         {
+            OneTable("test.toml");
+
             OneTable("tests\\example.toml");
             OneTable("tests\\table-array-nest.toml");
             OneTable("tests\\table-array-many.toml");

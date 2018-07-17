@@ -330,7 +330,7 @@ namespace Toml
         #region "fields"
 
         /// <summary>読み残しバッファ。</summary>
-        private byte[] restBuffer = new byte[8];
+        private byte[] restBuffer = new byte[4096];
 
         /// <summary>読み込み済みバイト数。</summary>
         private int readed;
@@ -396,7 +396,7 @@ namespace Toml
                         // 1. 文字数分取り込んでいるためバッファに書き込む
                         //    1-1. 改行ならば取り込み中止
                         // 2. 文字数取り込めていないため、次を取り込む
-                        if (i + skip <= this.restBuffer.Length) {
+                        if (i + skip <= maxLen) {
                             var ch = UTF8.Build(this.restBuffer, i, skip);      // 1
                             this.characters.Add(ch);
 
@@ -411,9 +411,9 @@ namespace Toml
                             }
                         }
                         else {
-                            Buffer.BlockCopy(this.restBuffer, i,                // 2
-                                             this.restBuffer, 0, maxLen - i);
-                            this.readed = maxLen - i;
+                            var rest = maxLen - i;                              // 2
+                            Buffer.BlockCopy(this.restBuffer, i, this.restBuffer, 0, rest);
+                            this.readed = rest + sr.Read(this.restBuffer, rest, this.restBuffer.Length - rest);
                         }
                     }
                 }
