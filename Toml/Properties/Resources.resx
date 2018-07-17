@@ -1,0 +1,219 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ANALISYS_DATE_ERR" xml:space="preserve">
+    <value>日付が解析できない</value>
+  </data>
+  <data name="ANALISYS_KEY_VALUE_ERR" xml:space="preserve">
+    <value>キー／値解析に失敗</value>
+  </data>
+  <data name="ANALISYS_TIME_DIFF_ERR" xml:space="preserve">
+    <value>時差が解析できない</value>
+  </data>
+  <data name="ANALISYS_TIME_ERR" xml:space="preserve">
+    <value>時間が解析できない</value>
+  </data>
+  <data name="ARRAY_NOT_CLOSE_ERR" xml:space="preserve">
+    <value>配列が正しく閉じられていない</value>
+  </data>
+  <data name="ARRAY_VALUE_DIFFERENT_ERR" xml:space="preserve">
+    <value>配列内の値の型が異なる</value>
+  </data>
+  <data name="DEFINED_KEY_ERR" xml:space="preserve">
+    <value>キーが再定義された</value>
+  </data>
+  <data name="DOUBLE_VALUE_RANGE_ERR" xml:space="preserve">
+    <value>実数値が有効範囲を超えている</value>
+  </data>
+  <data name="EMPTY_COMMA_ERR" xml:space="preserve">
+    <value>カンマの前に値が定義されていない</value>
+  </data>
+  <data name="EMPTY_VAL_INDEX_ERR" xml:space="preserve">
+    <value>空値はインデックスアクセスできない</value>
+  </data>
+  <data name="ERR_MSG_TEMPLATE" xml:space="preserve">
+    <value>{0} 行:{1} 列:{2}</value>
+  </data>
+  <data name="INDEX_OUT_RANGE" xml:space="preserve">
+    <value>添え字が範囲外</value>
+  </data>
+  <data name="INLINE_TABLE_NOT_CLOSE_ERR" xml:space="preserve">
+    <value>インラインテーブルが正しく閉じられていない</value>
+  </data>
+  <data name="INTEGER_VALUE_RANGE_ERR" xml:space="preserve">
+    <value>整数値が有効範囲を超えている</value>
+  </data>
+  <data name="INVALID_ESCAPE_CHAR_ERR" xml:space="preserve">
+    <value>無効なエスケープ文字が指定された</value>
+  </data>
+  <data name="KEY_ANALISYS_ERR" xml:space="preserve">
+    <value>キー文字列の解析に失敗</value>
+  </data>
+  <data name="KEY_VALUE_ERR" xml:space="preserve">
+    <value>値の解析に失敗</value>
+  </data>
+  <data name="LITERAL_STRING_ERR" xml:space="preserve">
+    <value>リテラル文字列定義エラー</value>
+  </data>
+  <data name="MULTI_DECIMAL_ERR" xml:space="preserve">
+    <value>複数の小数点が定義された</value>
+  </data>
+  <data name="MULTI_LITERAL_STRING_ERR" xml:space="preserve">
+    <value>複数リテラル文字列定義エラー</value>
+  </data>
+  <data name="MULTI_QUOAT_STRING_ERR" xml:space="preserve">
+    <value>複数クォーテーション文字列定義エラー</value>
+  </data>
+  <data name="NOT_DEFINED_VALUE_ERR" xml:space="preserve">
+    <value>値が定義されていない</value>
+  </data>
+  <data name="NO_LAST_ZERO_ERR" xml:space="preserve">
+    <value>小数点の後に数値が入力されていない</value>
+  </data>
+  <data name="NO_LEADING_ZERO_ERR" xml:space="preserve">
+    <value>小数点の前に数値が入力されていない</value>
+  </data>
+  <data name="QUOAT_STRING_ERR" xml:space="preserve">
+    <value>文字列定義エラー</value>
+  </data>
+  <data name="REREGIST_KEY_ERR" xml:space="preserve">
+    <value>既に同キーが登録されています</value>
+  </data>
+  <data name="TABLE_ARRAY_SYNTAX_ERR" xml:space="preserve">
+    <value>テーブル配列構文の解析に失敗</value>
+  </data>
+  <data name="TABLE_REDEFINITION_ERR" xml:space="preserve">
+    <value>テーブル名を再定義しています</value>
+  </data>
+  <data name="TABLE_SYNTAX_ERR" xml:space="preserve">
+    <value>テーブル構文の解析に失敗</value>
+  </data>
+  <data name="UNDERBAR_CONTINUE_ERR" xml:space="preserve">
+    <value>数値定義に連続してアンダーバーが使用された</value>
+  </data>
+  <data name="UNICODE_DEFINE_ERR" xml:space="preserve">
+    <value>ユニコード文字定義の解析に失敗</value>
+  </data>
+  <data name="USED_VALUE_TYPE_ERR" xml:space="preserve">
+    <value>Tomlデータの型が使用できません</value>
+  </data>
+  <data name="ZERO_NUMBER_ERR" xml:space="preserve">
+    <value>数値の先頭に無効な 0がある</value>
+  </data>
+</root>

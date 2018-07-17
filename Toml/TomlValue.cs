@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Toml.Properties;
 
 namespace Toml
 {
@@ -130,7 +131,7 @@ namespace Toml
         /// <summary>値をインデックスで取得する。</summary>
         /// <param name="index">インデックス。</param>
         /// <returns>値。</returns>
-        public object this[int index] => throw new IndexOutOfRangeException("空値はインデックスアクセスできない");
+        public object this[int index] => throw new IndexOutOfRangeException(Resources.EMPTY_VAL_INDEX_ERR);
 
         /// <summary>値の数を取得する。</summary>
         public int Length => 0;
@@ -211,7 +212,7 @@ namespace Toml
                     return TomlValueType.TomlDateValue;
                 }
                 else {
-                    throw new InvalidOperationException("Tomlデータの型が使用できません");
+                    throw new InvalidOperationException(Resources.USED_VALUE_TYPE_ERR);
                 }
             }
         }
@@ -338,7 +339,7 @@ namespace Toml
                     return TomlValueType.TomlArrayValue;
                 }
                 else {
-                    throw new InvalidOperationException("Tomlデータの型が使用できません");
+                    throw new InvalidOperationException(Resources.USED_VALUE_TYPE_ERR);
                 }
             }
         }
@@ -356,7 +357,7 @@ namespace Toml
                     return this.raw[index];
                 }
                 else {
-                    throw new IndexOutOfRangeException("添え字が範囲外");
+                    throw new IndexOutOfRangeException(Resources.INDEX_OUT_RANGE);
                 }
             }
         }

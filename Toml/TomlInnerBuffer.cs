@@ -233,8 +233,6 @@ namespace Toml
                 }
             }
 
-
-
             /// <summary>先頭の改行を取り除く。</summary>
             public void SkipHeadLineFeed()
             {

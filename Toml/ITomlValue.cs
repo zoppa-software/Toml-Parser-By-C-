@@ -6,6 +6,8 @@ namespace Toml
     public interface ITomlValue
         : IEnumerable<KeyValuePair<string, ITomlValue>>
     {
+        #region "methods"
+
         /// <summary>要素の種類を取得する。</summary>
         TomlValueType ValueType
         {
@@ -36,5 +38,7 @@ namespace Toml
         /// <param name="key">キー。</param>
         /// <returns>値。</returns>
         ITomlValue Member(string key);
+
+        #endregion
     }
 }

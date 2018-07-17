@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Toml.Properties;
 
 namespace Toml
 {
@@ -166,7 +167,7 @@ namespace Toml
 
                 case TomlInnerBuffer.LineType.TomlKeyValueLine:     // 2
                     if (!this.AnalisysKeyAndValue(iter, this.current, false)) {
-                        throw new TomlAnalisysException("キー／値解析に失敗", iter);
+                        throw new TomlAnalisysException(Resources.ANALISYS_KEY_VALUE_ERR, iter);
                     }
                     break;
 
@@ -202,7 +203,7 @@ namespace Toml
             var keyPtr = iter.GetKeys();            // 1
             iter.SkipSpace();                       // 2
             if (iter.GetChar(0).ch1 != '=') {       // 3
-                throw new TomlAnalisysException("キー文字列の解析に失敗", iter);
+                throw new TomlAnalisysException(Resources.KEY_ANALISYS_ERR, iter);
             }
 
             // 値を取得する
@@ -217,7 +218,7 @@ namespace Toml
 
             // 改行まで確認
             if (!lastNoCheck && !iter.CheckLineEndOrComment()) {
-                throw new TomlAnalisysException("値の解析に失敗", iter);
+                throw new TomlAnalisysException(Resources.KEY_VALUE_ERR, iter);
             }
 
             // '.' で指定されたテーブル参照を収集する
@@ -233,7 +234,7 @@ namespace Toml
 
                 switch (curTable.SearchPathTable(keystr, out newTable)) {   // 1
                     case 0:                                                 // 2
-                        throw new TomlAnalisysException("テーブル名を再定義しています", iter);
+                        throw new TomlAnalisysException(Resources.TABLE_REDEFINITION_ERR, iter);
 
                     case 1:
                         curTable = newTable;                                // 3
@@ -254,7 +255,7 @@ namespace Toml
                 return true;
             }
             else {
-                throw new TomlAnalisysException("キーが再定義された", iter);
+                throw new TomlAnalisysException(Resources.DEFINED_KEY_ERR, iter);
             }
         }
 
@@ -351,7 +352,7 @@ namespace Toml
                 }
             }
             else {
-                throw new TomlAnalisysException("値が定義されていない", iter);
+                throw new TomlAnalisysException(Resources.NOT_DEFINED_VALUE_ERR, iter);
             }
         }
 
@@ -387,8 +388,7 @@ namespace Toml
                         break;
                 }
             }
-
-            throw new TomlAnalisysException("インラインテーブルが正しく閉じられていない", iter);
+            throw new TomlAnalisysException(Resources.INLINE_TABLE_NOT_CLOSE_ERR, iter);
         }
 
         /// <summary>配列を解析する。</summary>
@@ -424,16 +424,15 @@ namespace Toml
                             break;
                         }
                         else {
-                            throw new TomlAnalisysException("カンマの前に値が定義されていない", iter);
+                            throw new TomlAnalisysException(Resources.EMPTY_COMMA_ERR, iter);
                         }
 
                     default:                        // 3
                         break;
                 }
             }
-
             // 配列が閉じられていない
-            throw new TomlAnalisysException("配列が正しく閉じられていない", iter);
+            throw new TomlAnalisysException(Resources.ARRAY_NOT_CLOSE_ERR, iter);
         }
 
         /// <summary>配列内の値の型が全て一致するか判定する。</summary>
@@ -451,7 +450,7 @@ namespace Toml
 
                 for (int i = 1; i < array.Count; ++i) {
                     if (type != array[i].ValueType) {
-                        throw new TomlAnalisysException("配列内の値の型が異なる", iter);
+                        throw new TomlAnalisysException(Resources.ARRAY_VALUE_DIFFERENT_ERR, iter);
                     }
                 }
             }
@@ -496,7 +495,7 @@ namespace Toml
 
             // テーブルが閉じられているか確認
             if (!iter.CloseTable()) {
-                throw new TomlAnalisysException("テーブル構文の解析に失敗", iter);
+                throw new TomlAnalisysException(Resources.TABLE_SYNTAX_ERR, iter);
             }
 
             // テーブルを作成する
@@ -510,7 +509,7 @@ namespace Toml
             foreach (var keystr in keyPtr) {
                 switch (curTable.SearchPathTable(keystr, out newTable)) {    // 1
                     case 0:                                                  // 2
-                        throw new TomlAnalisysException("テーブル名を再定義しています", iter);
+                        throw new TomlAnalisysException(Resources.TABLE_REDEFINITION_ERR, iter);
 
                     case 1:
                         curTable = newTable;                                // 3
@@ -533,7 +532,7 @@ namespace Toml
                 this.current.IsDefined = true;
             }
             else {
-                throw new TomlAnalisysException("キーが再定義された", iter);
+                throw new TomlAnalisysException(Resources.DEFINED_KEY_ERR, iter);
             }
         }
 
@@ -547,7 +546,7 @@ namespace Toml
 
             // テーブル配列が閉じられているか確認
             if (!iter.CloseTableArray()) {
-                throw new TomlAnalisysException("テーブル配列構文の解析に失敗", iter);
+                throw new TomlAnalisysException(Resources.TABLE_ARRAY_SYNTAX_ERR, iter);
             }
 
             // 最下層のテーブル以外のテーブル参照を収集する
@@ -564,7 +563,7 @@ namespace Toml
 
                 switch (curTable.SearchPathTable(keystr, out newTable)) {   // 1
                     case 0:                                                 // 2
-                        throw new TomlAnalisysException("テーブル名を再定義しています", iter);
+                        throw new TomlAnalisysException(Resources.TABLE_REDEFINITION_ERR, iter);
 
                     case 1:
                         curTable = newTable;                                // 3
@@ -596,7 +595,7 @@ namespace Toml
                     ((Array<TomlTable>)val).Add(newTable);
                 }
                 else {                                                      // 2-3
-                    throw new TomlAnalisysException("キーが再定義された", iter);
+                    throw new TomlAnalisysException(Resources.DEFINED_KEY_ERR, iter);
                 }
             }
             else {

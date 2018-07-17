@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
+using Toml.Properties;
 
 namespace Toml
 {
@@ -35,7 +36,7 @@ namespace Toml
                     return pair[index];
                 }
                 else {
-                    throw new IndexOutOfRangeException("添え字が範囲外");
+                    throw new IndexOutOfRangeException(Resources.INDEX_OUT_RANGE);
                 }
             }
         }
@@ -96,7 +97,7 @@ namespace Toml
                 this.keyPair.Add(key, value);
             }
             else {
-                throw new ArgumentException("既に同キーが登録されています");
+                throw new ArgumentException(Resources.REREGIST_KEY_ERR);
             }
         }
 

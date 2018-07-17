@@ -1,4 +1,5 @@
 ﻿using System;
+using Toml.Properties;
 
 namespace Toml
 {
@@ -56,7 +57,7 @@ namespace Toml
         /// <returns>文字列。</returns>
         public override string ToString()
         {
-            return string.Format("{0} 行:{1} 列:{2}",
+            return string.Format(Resources.ERR_MSG_TEMPLATE,
                                  this.Message,
                                  (this.YPosition >= 0 ? this.YPosition : 0),
                                  (this.XPosition >= 0 ? this.XPosition : 0));

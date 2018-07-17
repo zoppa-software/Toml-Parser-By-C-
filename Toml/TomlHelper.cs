@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Toml.Properties;
 
 namespace Toml
 {
@@ -118,7 +119,7 @@ namespace Toml
                 return Encoding.UTF8.GetString(buf.ToArray());
             }
             else {
-                throw new TomlAnalisysException("キー文字列の解析に失敗", iter);
+                throw new TomlAnalisysException(Resources.KEY_ANALISYS_ERR, iter);
             }
         }
 
@@ -149,9 +150,8 @@ namespace Toml
                         break;
                 }
             }
-
             // " で終了できなかったためエラー
-            throw new TomlAnalisysException("文字列定義エラー", iter);
+            throw new TomlAnalisysException(Resources.QUOAT_STRING_ERR, iter);
         }
 
         /// <summary>' で囲まれた文字列を取得する。</summary>
@@ -176,9 +176,8 @@ namespace Toml
                         break;
                 }
             }
-
             // ' で終了できなかったためエラー
-            throw new TomlAnalisysException("リテラル文字列定義エラー", iter);
+            throw new TomlAnalisysException(Resources.LITERAL_STRING_ERR, iter);
         }
 
         /// <summary>'\'エスケープ文字を取得する。</summary>
@@ -238,7 +237,7 @@ namespace Toml
                         break;
 
                     default:
-                        throw new TomlAnalisysException("無効なエスケープ文字が指定された", iter);
+                        throw new TomlAnalisysException(Resources.INVALID_ESCAPE_CHAR_ERR, iter);
                 }
             }
         }
@@ -265,7 +264,7 @@ namespace Toml
                     val |= (uint)(10 + c.ch1 - 'A');
                 }
                 else {
-                    throw new TomlAnalisysException("ユニコード文字定義の解析に失敗", iter);
+                    throw new TomlAnalisysException(Resources.UNICODE_DEFINE_ERR, iter);
                 }
             }
 
@@ -492,7 +491,7 @@ namespace Toml
             } while (!eof);
 
             // " で終了できなかったためエラー
-            throw new TomlAnalisysException("複数クォーテーション文字列定義エラー", iter);
+            throw new TomlAnalisysException(Resources.MULTI_QUOAT_STRING_ERR, iter);
         }
 
         /// <summary>"'" で囲まれた文字列を取得する。</summary>
@@ -537,7 +536,7 @@ namespace Toml
             } while (!eof);
 
             // " で終了できなかったためエラー
-            throw new TomlAnalisysException("複数リテラル文字列定義エラー", iter);
+            throw new TomlAnalisysException(Resources.MULTI_LITERAL_STRING_ERR, iter);
         }
 
         //-----------------------------------------------------------------------------
@@ -621,7 +620,7 @@ namespace Toml
                 // 空実装
             }
             else {                                                  // 2
-                throw new TomlAnalisysException("日付が解析できない", iter);
+                throw new TomlAnalisysException(Resources.ANALISYS_DATE_ERR, iter);
             }
 
             // 'T' の指定がなければ日にちのみ、終了
@@ -645,7 +644,7 @@ namespace Toml
                 return new TomlDate((ushort)year, (byte)month, (byte)day, 0, 0, 0, 0, 0, 0);
             }
             else {
-                throw new TomlAnalisysException("日付が解析できない", iter);
+                throw new TomlAnalisysException(Resources.ANALISYS_DATE_ERR, iter);
             }
         }
 
@@ -668,7 +667,7 @@ namespace Toml
                 // 空実装
             }
             else {                                                  // 2
-                throw new TomlAnalisysException("時間が解析できない", iter);
+                throw new TomlAnalisysException(Resources.ANALISYS_TIME_ERR, iter);
             }
 
             // ミリ秒の解析
@@ -708,7 +707,7 @@ namespace Toml
                             (sbyte)(c.ch1 == '+' ? z_hor : -z_hor), (byte)z_min);
                 }
                 else {
-                    throw new TomlAnalisysException("時差が解析できない", iter);
+                    throw new TomlAnalisysException(Resources.ANALISYS_TIME_DIFF_ERR, iter);
                 }
             }
             else {
@@ -740,8 +739,6 @@ namespace Toml
                         break;
                 }
             }
-            //return get_10number_value(number_sign, buffer,
-            //                point, next_point, token_type, error);
             return Get10NumberValue(iter, numberSign);
         }
 
@@ -762,7 +759,7 @@ namespace Toml
                 //    2-1. 数値の有効範囲を超えるならばエラー
                 if (c.ch1 == '_') {
                     if (ud) {                               // 1
-                        throw new TomlAnalisysException("数値定義に連続してアンダーバーが使用された", iter);
+                        throw new TomlAnalisysException(Resources.UNDERBAR_CONTINUE_ERR, iter);
                     }
                     ud = true;
                 }
@@ -771,7 +768,7 @@ namespace Toml
                         v = v * 16 + (ulong)(c.ch1 - '0');
                     }
                     else {                                  // 2-1
-                        throw new TomlAnalisysException("整数値が有効範囲を超えている", iter);
+                        throw new TomlAnalisysException(Resources.INTEGER_VALUE_RANGE_ERR, iter);
                     }
                     ud = false;
                 }
@@ -780,7 +777,7 @@ namespace Toml
                         v = v * 16 + (ulong)(c.ch1 - 'A') + 10;
                     }
                     else {                                  // 2-1
-                        throw new TomlAnalisysException("整数値が有効範囲を超えている", iter);
+                        throw new TomlAnalisysException(Resources.INTEGER_VALUE_RANGE_ERR, iter);
                     }
                     ud = false;
                 }
@@ -789,7 +786,7 @@ namespace Toml
                         v = v * 16 + (ulong)(c.ch1 - 'a') + 10;
                     }
                     else {                                  // 2-1
-                        throw new TomlAnalisysException("整数値が有効範囲を超えている", iter);
+                        throw new TomlAnalisysException(Resources.INTEGER_VALUE_RANGE_ERR, iter);
                     }
                     ud = false;
                 }
@@ -808,7 +805,7 @@ namespace Toml
                 return TomlValue.Create(v);
             }
             else {
-                throw new TomlAnalisysException("整数値が有効範囲を超えている", iter);
+                throw new TomlAnalisysException(Resources.INTEGER_VALUE_RANGE_ERR, iter);
             }
         }
 
@@ -829,7 +826,7 @@ namespace Toml
                 //    2-1. 数値の有効範囲を超えるならばエラー
                 if (c.ch1 == '_') {
                     if (ud) {                               // 1
-                        throw new TomlAnalisysException("数値定義に連続してアンダーバーが使用された", iter);
+                        throw new TomlAnalisysException(Resources.UNDERBAR_CONTINUE_ERR, iter);
                     }
                     ud = true;
                 }
@@ -838,7 +835,7 @@ namespace Toml
                         v = v * 8 + (ulong)(c.ch1 - '0');
                     }
                     else {                                  // 2-1
-                        throw new TomlAnalisysException("整数値が有効範囲を超えている", iter);
+                        throw new TomlAnalisysException(Resources.INTEGER_VALUE_RANGE_ERR, iter);
                     }
                     ud = false;
                 }
@@ -857,7 +854,7 @@ namespace Toml
                 return TomlValue.Create(v);
             }
             else {
-                throw new TomlAnalisysException("整数値が有効範囲を超えている", iter);
+                throw new TomlAnalisysException(Resources.INTEGER_VALUE_RANGE_ERR, iter);
             }
         }
 
@@ -878,7 +875,7 @@ namespace Toml
                 //    2-1. 数値の有効範囲を超えるならばエラー
                 if (c.ch1 == '_') {
                     if (ud) {                               // 1
-                        throw new TomlAnalisysException("数値定義に連続してアンダーバーが使用された", iter);
+                        throw new TomlAnalisysException(Resources.UNDERBAR_CONTINUE_ERR, iter);
                     }
                     ud = true;
                 }
@@ -887,7 +884,7 @@ namespace Toml
                         v = v * 2 + (ulong)(c.ch1 - '0');
                     }
                     else {                                  // 2-1
-                        throw new TomlAnalisysException("整数値が有効範囲を超えている", iter);
+                        throw new TomlAnalisysException(Resources.INTEGER_VALUE_RANGE_ERR, iter);
                     }
                     ud = false;
                 }
@@ -906,7 +903,7 @@ namespace Toml
                 return TomlValue.Create(v);
             }
             else {
-                throw new TomlAnalisysException("整数値が有効範囲を超えている", iter);
+                throw new TomlAnalisysException(Resources.INTEGER_VALUE_RANGE_ERR, iter);
             }
         }
 
@@ -935,7 +932,7 @@ namespace Toml
                 // 4. 指数部（e）を取得する
                 if (c.ch1 == '_') {
                     if (ud) {                           // 1
-                        throw new TomlAnalisysException("数値定義に連続してアンダーバーが使用された", iter);
+                        throw new TomlAnalisysException(Resources.UNDERBAR_CONTINUE_ERR, iter);
                     }
                     ud = true;
                 }
@@ -951,7 +948,7 @@ namespace Toml
                         }
                     }
                     else {                              // 2-1
-                        throw new TomlAnalisysException("整数値が有効範囲を超えている", iter);
+                        throw new TomlAnalisysException(Resources.INTEGER_VALUE_RANGE_ERR, iter);
                     }
                     ud = false;
                 }
@@ -960,10 +957,10 @@ namespace Toml
                         digit = 0;
                     }
                     else if (ld_zero) {
-                        throw new TomlAnalisysException("複数の小数点が定義された", iter);
+                        throw new TomlAnalisysException(Resources.MULTI_DECIMAL_ERR, iter);
                     }
                     else {
-                        throw new TomlAnalisysException("小数点の前に数値が入力されていない", iter);
+                        throw new TomlAnalisysException(Resources.NO_LEADING_ZERO_ERR, iter);
                     }
                 }
                 else if (c.ch1 == 'e' || c.ch1 == 'E') {
@@ -997,7 +994,7 @@ namespace Toml
                         return TomlValue.Create(long.MinValue);
                     }
                     else { 
-                        throw new TomlAnalisysException("実数値が有効範囲を超えている", iter);
+                        throw new TomlAnalisysException(Resources.DOUBLE_VALUE_RANGE_ERR, iter);
                     }
                 }
                 else {
@@ -1005,13 +1002,13 @@ namespace Toml
                         return TomlValue.Create((long)v);
                     }
                     else {
-                        throw new TomlAnalisysException("実数値が有効範囲を超えている", iter);
+                        throw new TomlAnalisysException(Resources.DOUBLE_VALUE_RANGE_ERR, iter);
                     }
                 }
             }
             else {
                 if (digit >= 0 && !lst_zero) {
-                    throw new TomlAnalisysException("小数点の後に数値が入力されていない", iter);
+                    throw new TomlAnalisysException(Resources.NO_LAST_ZERO_ERR, iter);
                 }
 
                 // 実数値を取得する
@@ -1042,7 +1039,7 @@ namespace Toml
                     return TomlValue.Create(numberSign ? (double)-dv : (double)dv);
                 }
                 else {
-                    throw new TomlAnalisysException("実数値が有効範囲を超えている", iter);
+                    throw new TomlAnalisysException(Resources.DOUBLE_VALUE_RANGE_ERR, iter);
                 }
             }
         }
@@ -1083,14 +1080,14 @@ namespace Toml
                     // 2. 指数部を計算する
                     if (c.ch1 == '_') {
                         if (ud) {                               // 1
-                            throw new TomlAnalisysException("数値定義に連続してアンダーバーが使用された", iter);
+                            throw new TomlAnalisysException(Resources.UNDERBAR_CONTINUE_ERR, iter);
                         }
                         ud = true;
                     }
                     else if (c.ch1 >= '0' && c.ch1 <= '9') {
                         exp_v = exp_v * 10 + (c.ch1 - '0');     // 2
                         if (exp_v >= 308) {
-                            throw new TomlAnalisysException("実数の表現が範囲外", iter);
+                            throw new TomlAnalisysException(Resources.DOUBLE_VALUE_RANGE_ERR, iter);
                         }
                         ud = false;
                     }
@@ -1104,10 +1101,10 @@ namespace Toml
                 // 1. 指数値が 0以下でないことを確認
                 // 2. 指数値が '0'始まりでないことを確認
                 if (exp_v <= 0) {                               // 1
-                    throw new TomlAnalisysException("実数の表現が範囲外", iter);
+                    throw new TomlAnalisysException(Resources.DOUBLE_VALUE_RANGE_ERR, iter);
                 }
                 else if (iter.GetChar(0).ch1 == '0') {          // 2
-                    throw new TomlAnalisysException("数値の先頭に無効な 0がある", iter);
+                    throw new TomlAnalisysException(Resources.ZERO_NUMBER_ERR, iter);
                 }
             }
 
@@ -1117,7 +1114,7 @@ namespace Toml
             // 小数点位置とマージ
             exp_v -= (digit > 0 ? digit : 0);
             if (exp_v > 308 || exp_v < -308) {
-                throw new TomlAnalisysException("実数の表現が範囲外", iter);
+                throw new TomlAnalisysException(Resources.DOUBLE_VALUE_RANGE_ERR, iter);
             }
 
             resExpo = exp_v;

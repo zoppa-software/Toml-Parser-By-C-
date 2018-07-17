@@ -1,4 +1,6 @@
-﻿namespace Toml
+﻿using Toml.Properties;
+
+namespace Toml
 {
     /// <summary>解析サポート機能（コレクション向け）</summary>
     internal static class TomlCollectionHelper
@@ -32,7 +34,7 @@
                 }
             }
             EXIT_WHILE:
-            throw new TomlAnalisysException("インラインテーブルが正しく閉じられていない", iter);
+            throw new TomlAnalisysException(Resources.INLINE_TABLE_NOT_CLOSE_ERR, iter);
         }
 
         /// <summary>配列が閉じられていることを確認する。</summary>
@@ -62,7 +64,7 @@
                 }
             }
             EXIT_WHILE:
-            throw new TomlAnalisysException("配列が正しく閉じられていない", iter);
+            throw new TomlAnalisysException(Resources.ARRAY_NOT_CLOSE_ERR, iter);
         }
 
         /// <summary>パスを走査して、テーブルを取得する。</summary>
