@@ -6,16 +6,60 @@ namespace TomlParserTest
 {
     class Program
     {
-        private static void AreEqual(object left, object right)
-        {
-            if (!left.Equals(right)) {
-                throw new InvalidOperationException();
-            }
-        }
-
         static void Main(string[] args)
         {
+            var tomlData = @"
+                title = ""TOML sample""
+
+                [database]
+                server = ""192.168.1.1""
+                ports = [8001, 8002, 8003]
+                connection_max = 5000
+                enabled = true
+
+                [servers]
+
+                # Indentation (tabs and/or spaces) is allowed but not required
+                  [servers.alpha]
+                  ip = ""10.0.0.1""
+                  dc = ""eqdc10""
+
+                  [servers.beta]
+                  ip = ""10.0.0.2""
+                  dc = ""eqdc10""
+
+                [clients]
+                data = [ [""gamma"", ""delta""], [1, 2] ]
+
+                # Line breaks are OK when inside arrays
+                hosts = [
+                  ""alpha"",
+                  ""omega""
+                ]";
+
             dynamic toml = new TomlDocument();
+            toml.Load(tomlData);
+            AreEqual((string)toml.title, "TOML sample");
+
+            AreEqual((string)toml.database.server, "192.168.1.1");
+            AreEqual((int)toml.database.ports[0], 8001);
+            AreEqual((int)toml.database.ports[1], 8002);
+            AreEqual((int)toml.database.ports[2], 8003);
+            AreEqual((int)toml.database.connection_max, 5000);
+            AreEqual((bool)toml.database.enabled, true);
+
+            AreEqual((string)toml.servers.alpha.ip, "10.0.0.1");
+            AreEqual((string)toml.servers.alpha.dc, "eqdc10");
+            AreEqual((string)toml.servers.beta.ip, "10.0.0.2");
+            AreEqual((string)toml.servers.beta.dc, "eqdc10");
+
+            AreEqual((string)toml.clients.data[0][0], "gamma");
+            AreEqual((string)toml.clients.data[0][1], "delta");
+            AreEqual((int)toml.clients.data[1][0], 1);
+            AreEqual((int)toml.clients.data[1][1], 2);
+            AreEqual((string)toml.clients.hosts[0], "alpha");
+            AreEqual((string)toml.clients.hosts[1], "omega");
+
             toml.LoadPath("test.toml");
 
             dynamic characters = toml.streetFighter.characters;
@@ -131,6 +175,13 @@ namespace TomlParserTest
             }
             catch (TomlAnalisysException e) {
                 Console.WriteLine(e.ToString());
+            }
+        }
+
+        private static void AreEqual(object left, object right)
+        {
+            if (!left.Equals(right)) {
+                throw new InvalidOperationException();
             }
         }
     }
