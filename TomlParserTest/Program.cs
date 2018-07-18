@@ -1,13 +1,34 @@
 ﻿using System;
+using System.Diagnostics;
 using Toml;
 
 namespace TomlParserTest
 {
     class Program
     {
+        private static void AreEqual(object left, object right)
+        {
+            if (!left.Equals(right)) {
+                throw new InvalidOperationException();
+            }
+        }
+
         static void Main(string[] args)
         {
-            OneTable("test.toml");
+            dynamic toml = new TomlDocument();
+            toml.LoadPath("test.toml");
+
+            dynamic characters = toml.streetFighter.characters;
+            AreEqual((string)characters[0].name, "リュウ");
+            AreEqual((string)characters[0].country, "Japan");
+            AreEqual((string)characters[0].specialAttacks[0], "波動拳");
+            AreEqual((string)characters[0].specialAttacks[1], "昇竜拳");
+            AreEqual((string)characters[0].specialAttacks[2], "竜巻旋風脚");
+
+            AreEqual((string)characters[1].name, "ガイル");
+            AreEqual((string)characters[1].country, "USA");
+            AreEqual((string)characters[1].specialAttacks[0], "ソニックブーム");
+            AreEqual((string)characters[1].specialAttacks[1], "サマーソルトキック");
 
             OneTable("tests\\example.toml");
             OneTable("tests\\table-array-nest.toml");

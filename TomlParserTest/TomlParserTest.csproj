@@ -53,6 +53,7 @@
     <None Include="bin\Debug\netcoreapp2.0\invalid\text-after-table.toml" />
     <None Include="bin\Debug\netcoreapp2.0\invalid\text-before-array-separator.toml" />
     <None Include="bin\Debug\netcoreapp2.0\invalid\text-in-array.toml" />
+    <None Include="bin\Debug\netcoreapp2.0\test.toml" />
     <None Include="bin\Debug\netcoreapp2.0\tests\array-empty.toml" />
     <None Include="bin\Debug\netcoreapp2.0\tests\array-nospaces.toml" />
     <None Include="bin\Debug\netcoreapp2.0\tests\arrays-hetergeneous.toml" />

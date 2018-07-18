@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,7 +10,7 @@ namespace Toml
 {
     /// <summary>Tomlドキュメント。</summary>
     public sealed class TomlDocument
-        : ITomlValue
+        : DynamicObject, ITomlValue
     {
         #region "fields"
 
@@ -55,6 +56,22 @@ namespace Toml
         //---------------------------------------------------------------------
         // テーブル操作
         //---------------------------------------------------------------------
+        /// <summary>メンバーの値を取得する。</summary>
+        /// <param name="binder">オブジェクトに関する情報。</param>
+        /// <param name="result">取得した値。</param>
+        /// <returns>値が取得できたら真。</returns>
+        public override bool TryGetMember(GetMemberBinder binder, out object result)
+        {
+            if (this.root.Contains(binder.Name)) {
+                result = this.root.Member(binder.Name);
+                return true;
+            }
+            else {
+                result = null;
+                return false;
+            }
+        }
+
         /// <summary>指定のキーの値を取得する。</summary>
         /// <param name="key">キー。</param>
         /// <returns>値。</returns>

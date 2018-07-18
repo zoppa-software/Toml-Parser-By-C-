@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Text;
 using Toml.Properties;
@@ -178,7 +179,7 @@ namespace Toml
     /// <summary>値を表現する。</summary>
     /// <typeparam name="T">値の型。</typeparam>
     internal sealed class Value<T>
-        : ITomlValue
+        : DynamicObject, ITomlValue
     {
         #region "field"
 
@@ -253,6 +254,32 @@ namespace Toml
 
         #region "methods"
 
+        /// <summary>メンバーの値を取得する。</summary>
+        /// <param name="binder">オブジェクトに関する情報。</param>
+        /// <param name="result">取得した値。</param>
+        /// <returns>値が取得できたら真。</returns>
+        public override bool TryGetMember(GetMemberBinder binder, out object result)
+        {
+            if (binder.Name == "Raw") {
+                result = this.raw;
+                return true;
+            }
+            else {
+                result = null;
+                return false;
+            }
+        }
+
+        /// <summary>変換操作を実装する。</summary>
+        /// <param name="binder">オブジェクトに関する情報。</param>
+        /// <param name="result">取得した値。</param>
+        /// <returns>値が取得できたら真。</returns>
+        public override bool TryConvert(ConvertBinder binder, out object result)
+        {
+            result = Convert.ChangeType(this.raw, binder.Type);
+            return true;
+        }
+
         /// <summary>指定のキーの値を取得する。</summary>
         /// <param name="key">キー。</param>
         /// <returns>値。</returns>
@@ -312,7 +339,7 @@ namespace Toml
     /// <summary>配列を表現する。</summary>
     /// <typeparam name="T">値の型。</typeparam>
     internal sealed class Array<T>
-        : ITomlValue
+        : DynamicObject, ITomlValue
     {
         #region "field"
 
@@ -379,6 +406,40 @@ namespace Toml
         #endregion
 
         #region "methods"
+
+        /// <summary>配列操作を実装する。</summary>
+        /// <param name="binder">オブジェクトに関する情報。</param>
+        /// <param name="indexes">インデックスリスト。</param>
+        /// <param name="result">取得した値。</param>
+        /// <returns>値が取得できたら真。</returns>
+        public override bool TryGetIndex(GetIndexBinder binder, object[] indexes, out object result)
+        {
+            if (indexes.Length == 1) {
+                var i = Convert.ToInt32(indexes[0]);
+                result = this.raw[i];
+                return true;
+            }
+            else {
+                result = null;
+                return false;
+            }
+        }
+
+        /// <summary>メンバーの値を取得する。</summary>
+        /// <param name="binder">オブジェクトに関する情報。</param>
+        /// <param name="result">取得した値。</param>
+        /// <returns>値が取得できたら真。</returns>
+        public override bool TryGetMember(GetMemberBinder binder, out object result)
+        {
+            if (binder.Name == "Length") {
+                result = this.Length;
+                return true;
+            }
+            else {
+                result = null;
+                return false;
+            }
+        }
 
         /// <summary>指定のキーの値を取得する。</summary>
         /// <param name="key">キー。</param>
