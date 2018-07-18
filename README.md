@@ -95,6 +95,7 @@ AreEqual((string)toml.clients.hosts[1], "omega");
 
 ## Description
 Tomlファイルを読み込むためのライブラリになります。
+実行環境は #.NET Standard 2.0# です。
 記述のしやすさから C#の #dynamic# による動的アクセスに対応しています。
 ただし、#dynamic# ではインテリセンスによるコード補完、発生する例外がわかりにくく思います。
 その場合は、ITomlValueインターフェイスで定義されているプロパティ、メソッドで値を取得してください。
