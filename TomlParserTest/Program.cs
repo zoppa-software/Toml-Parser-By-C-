@@ -10,6 +10,9 @@ namespace TomlParserTest
         {
             var tomlData = @"
                 title = ""TOML sample""
+                ld1 = 1979-05-27
+                lt1 = 07:32:00
+                lt2 = 00:32:00.999999
 
                 [database]
                 server = ""192.168.1.1""
@@ -35,10 +38,14 @@ namespace TomlParserTest
                 hosts = [
                   ""alpha"",
                   ""omega""
-                ]";
+                ]
+                1234 = ""value""
+                """" = ""blank""     # 可能ですがお奨めしません
+            ";
 
             dynamic toml = new TomlDocument();
             toml.Load(tomlData);
+            Console.WriteLine(toml);
             AreEqual((string)toml.title, "TOML sample");
 
             AreEqual((string)toml.database.server, "192.168.1.1");
@@ -199,8 +206,15 @@ namespace TomlParserTest
             AreEqual((string)toml2.fruit.blah[1].physical.shape, "bent");
 
             dynamic toml3 = OneTable("tests\\hard_example.toml");
-
-            dynamic toml4 = OneTable("tests\\hard_example_unicode.toml");
+            AreEqual((string)toml3.the.test_string, "You'll hate me after this - #");
+            AreEqual((string)toml3.the.hard.test_array[0], "] ");
+            AreEqual((string)toml3.the.hard.test_array[1], " # ");
+            AreEqual((string)toml3.the.hard.test_array2[0], "Test #11 ]proved that");
+            AreEqual((string)toml3.the.hard.test_array2[1], "Experiment #9 was a success");
+            AreEqual((string)toml3.the.hard.another_test_string, " Same thing, but with a string #");
+            AreEqual((string)toml3.the.hard.harder_test_string, " And when \"'s are in the string, along with # \"");
+            AreEqual((string)((TomlDocument)toml3).Member("the").Member("hard").Member("bit#").Member("what?").Raw, "You don't think some user won't do that?");
+            AreEqual((string)((TomlDocument)toml3).Member("the").Member("hard").Member("bit#").Member("multi_line_array")[0], "]");
         }
 
         private static TomlDocument OneTable(string path)
