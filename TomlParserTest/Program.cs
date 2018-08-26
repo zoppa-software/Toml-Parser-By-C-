@@ -60,20 +60,6 @@ namespace TomlParserTest
             AreEqual((string)toml.clients.hosts[0], "alpha");
             AreEqual((string)toml.clients.hosts[1], "omega");
 
-            toml.LoadPath("test.toml");
-
-            dynamic characters = toml.streetFighter.characters;
-            AreEqual((string)characters[0].name, "リュウ");
-            AreEqual((string)characters[0].country, "Japan");
-            AreEqual((string)characters[0].specialAttacks[0], "波動拳");
-            AreEqual((string)characters[0].specialAttacks[1], "昇竜拳");
-            AreEqual((string)characters[0].specialAttacks[2], "竜巻旋風脚");
-
-            AreEqual((string)characters[1].name, "ガイル");
-            AreEqual((string)characters[1].country, "USA");
-            AreEqual((string)characters[1].specialAttacks[0], "ソニックブーム");
-            AreEqual((string)characters[1].specialAttacks[1], "サマーソルトキック");
-
             OneTable("tests\\example.toml");
             OneTable("tests\\table-array-nest.toml");
             OneTable("tests\\table-array-many.toml");
@@ -163,18 +149,72 @@ namespace TomlParserTest
             OneTable("invalid\\text-after-table.toml");
             OneTable("invalid\\text-before-array-separator.toml");
             OneTable("invalid\\text-in-array.toml");
+
+            test_var0_5();
         }
 
-        private static void OneTable(string path)
+        private static void test_var0_5()
+        {
+            dynamic toml1 = OneTable("tests\\example1.toml");
+            AreEqual((string)toml1.title, "TOML Example");
+
+            AreEqual((string)toml1.owner.name, "Tom Preston-Werner");
+            AreEqual((string)toml1.owner.organization, "GitHub");
+            AreEqual((string)toml1.owner.bio, "GitHub Cofounder & CEO\nLikes tater tots and beer.");
+            AreEqual((TomlDate)toml1.owner.dob, new TomlDate(1979, 5, 27, 7, 32, 0, 0, 0, 0));
+
+            AreEqual((string)toml1.database.server, "192.168.1.1");
+            AreEqual((int)toml1.database.ports[0], 8001);
+            AreEqual((int)toml1.database.ports[1], 8001);
+            AreEqual((int)toml1.database.ports[2], 8002);
+            AreEqual((int)toml1.database.connection_max, 5000);
+            AreEqual((bool)toml1.database.enabled, true);
+
+            AreEqual((string)toml1.servers.alpha.ip, "10.0.0.1");
+            AreEqual((string)toml1.servers.alpha.dc, "eqdc10");
+            AreEqual((string)toml1.servers.beta.ip, "10.0.0.2");
+            AreEqual((string)toml1.servers.beta.dc, "eqdc10");
+            AreEqual((string)toml1.servers.beta.country, "中国");
+
+            AreEqual((string)toml1.clients.data[0][0], "gamma");
+            AreEqual((string)toml1.clients.data[0][1], "delta");
+            AreEqual((int)toml1.clients.data[1][0], 1);
+            AreEqual((int)toml1.clients.data[1][1], 2);
+
+            AreEqual((string)toml1.clients.hosts[0], "alpha");
+            AreEqual((string)toml1.clients.hosts[1], "omega");
+
+            AreEqual((string)toml1.products[0].name, "Hammer");
+            AreEqual((int)toml1.products[0].sku, 738594937);
+            AreEqual((string)toml1.products[1].name, "Nail");
+            AreEqual((int)toml1.products[1].sku, 284758393);
+            AreEqual((string)toml1.products[1].color, "gray");
+
+            dynamic toml2 = OneTable("tests\\fruit.toml");
+            AreEqual((string)toml2.fruit.blah[0].name, "apple");
+            AreEqual((string)toml2.fruit.blah[0].physical.color, "red");
+            AreEqual((string)toml2.fruit.blah[0].physical.shape, "round");
+            AreEqual((string)toml2.fruit.blah[1].name, "banana");
+            AreEqual((string)toml2.fruit.blah[1].physical.color, "yellow");
+            AreEqual((string)toml2.fruit.blah[1].physical.shape, "bent");
+
+            dynamic toml3 = OneTable("tests\\hard_example.toml");
+
+            dynamic toml4 = OneTable("tests\\hard_example_unicode.toml");
+        }
+
+        private static TomlDocument OneTable(string path)
         {
             try {
                 Console.WriteLine("---------- {0} ----------", path);
                 var toml = new TomlDocument();
                 toml.LoadPath(path);
                 Console.WriteLine(toml);
+                return toml;
             }
             catch (TomlAnalisysException e) {
                 Console.WriteLine(e.ToString());
+                return null;
             }
         }
 

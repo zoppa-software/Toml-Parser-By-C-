@@ -53,7 +53,6 @@
     <None Include="bin\Debug\netcoreapp2.0\invalid\text-after-table.toml" />
     <None Include="bin\Debug\netcoreapp2.0\invalid\text-before-array-separator.toml" />
     <None Include="bin\Debug\netcoreapp2.0\invalid\text-in-array.toml" />
-    <None Include="bin\Debug\netcoreapp2.0\test.toml" />
     <None Include="bin\Debug\netcoreapp2.0\tests\array-empty.toml" />
     <None Include="bin\Debug\netcoreapp2.0\tests\array-nospaces.toml" />
     <None Include="bin\Debug\netcoreapp2.0\tests\arrays-hetergeneous.toml" />
@@ -65,8 +64,12 @@
     <None Include="bin\Debug\netcoreapp2.0\tests\dottrd-keys.toml" />
     <None Include="bin\Debug\netcoreapp2.0\tests\empty.toml" />
     <None Include="bin\Debug\netcoreapp2.0\tests\example.toml" />
+    <None Include="bin\Debug\netcoreapp2.0\tests\example1.toml" />
     <None Include="bin\Debug\netcoreapp2.0\tests\float.toml" />
     <None Include="bin\Debug\netcoreapp2.0\tests\float_no_number.toml" />
+    <None Include="bin\Debug\netcoreapp2.0\tests\fruit.toml" />
+    <None Include="bin\Debug\netcoreapp2.0\tests\hard_example.toml" />
+    <None Include="bin\Debug\netcoreapp2.0\tests\hard_example_unicode.toml" />
     <None Include="bin\Debug\netcoreapp2.0\tests\implicit-and-explicit-after.toml" />
     <None Include="bin\Debug\netcoreapp2.0\tests\implicit-and-explicit-before.toml" />
     <None Include="bin\Debug\netcoreapp2.0\tests\implicit-groups.toml" />

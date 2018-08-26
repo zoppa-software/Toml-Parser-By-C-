@@ -127,7 +127,7 @@
                         this.Second == other.Second &&
                         this.DecSecond == other.DecSecond &&
                         this.ZoneHour == other.ZoneHour &&
-                        this.ZoneMinute == this.ZoneMinute);
+                        this.ZoneMinute == other.ZoneMinute);
             }
             else {
                 return false;
